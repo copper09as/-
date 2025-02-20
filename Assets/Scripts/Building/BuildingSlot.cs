@@ -9,9 +9,18 @@ public class BuildingSlot : MonoBehaviour, IPointerDownHandler
     public BuildingDetails buildingDetails;
     public bool isFinish = false;
     private Button buildButton;
+
     public void OnPointerDown(PointerEventData eventData)
     {
-        Debug.Log(this.name);
+        if (!isFinish) return;
+        TempBuild tempBuild;
+        
+        tempBuild = BuildingManager.Instance.tempBuild;
+        tempBuild.GetComponent<SpriteRenderer>().sprite = buildingDetails.sprite;
+
+        tempBuild.buildingDetails = buildingDetails;
+        tempBuild.isDrag = true;
+
     }
     private void Start()
     {

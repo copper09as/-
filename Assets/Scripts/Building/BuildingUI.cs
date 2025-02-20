@@ -14,9 +14,17 @@ public class BuildingUI : MonoBehaviour
     private void UpdateBuildingSlot()
     {
         details.Clear();
-        foreach (var bd in BuildingManager.Instance.buildingBagSo.itemList)
+        try
         {
-            details.Add(BuildingManager.Instance.GetId(bd.buildingID));
+            foreach (var bd in BuildingManager.Instance.buildingBagSo.itemList)
+            {
+                details.Add(BuildingManager.Instance.GetId(bd.buildingID));
+            }
+        }
+        catch
+        {
+            Debug.Log("建筑管理器单例未获取");
+            return;
         }
         while(slots.Count < details.Count)
         {

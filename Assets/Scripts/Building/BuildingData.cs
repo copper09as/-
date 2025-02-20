@@ -7,8 +7,7 @@ using UnityEngine;
 public class BuildingDetails
 {
     public int buildingID;
-    public int areaX;
-    public int areaY;
+    public List<Vector2> areaGrid;
     public int price;
     public int gain;
     public Sprite sprite;
