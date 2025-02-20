@@ -32,12 +32,12 @@ MonoBehaviour:
     areaY: 0
     price: 300
     gain: 4
-    sprite: {fileID: 0}
+    sprite: {fileID: -626341378, guid: d67f8bdea7b454ba08443e00d51268b8, type: 3}
     name: "\u5C0F\u5403\u5E97"
   - buildingID: 2002
     areaX: 0
     areaY: 0
     price: 5
     gain: 4
-    sprite: {fileID: 0}
+    sprite: {fileID: -739621279, guid: d67f8bdea7b454ba08443e00d51268b8, type: 3}
     name: "\u5C0F\u5403\u5E97"

@@ -257,7 +257,7 @@ namespace MFarm.Inventory
                 playerMoney -= cost;
             }
             //Ë¢ÐÂUI
-            
+            EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.itemList);
         }
     
     public void BuildinGain()
