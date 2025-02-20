@@ -28,16 +28,19 @@ public class TempBuild : MonoBehaviour
         if(isDrag)
             this.transform.position = Input.mousePosition;
         if (Input.GetMouseButtonDown(1)) isDrag = false;
-        if (Input.GetMouseButtonDown(0) && BuildingManager.Instance.grid != null)
+        if (Input.GetMouseButtonDown(0) && BuildingManager.Instance.CanPlaceBuilding())
         {
             isDrag = false;
             GameObject gridBuild = new GameObject();
-            gridBuild.AddComponent<UnityEngine.UI.Image>();
-            gridBuild.GetComponent<UnityEngine.UI.Image>().sprite = GetComponent<UnityEngine.UI.Image>().sprite;
+            gridBuild.AddComponent<SpriteRenderer>();
+            gridBuild.GetComponent<SpriteRenderer>().sprite = GetComponent<UnityEngine.UI.Image>().sprite;
+            gridBuild.layer = 6;
             gridBuild.AddComponent<Building>();
             gridBuild.GetComponent<Building>().buildingDetails = this.buildingDetails;
             gridBuild.transform.position = BuildingManager.Instance.grid.transform.position;
             gridBuild.transform.parent = BuildingManager.Instance.GridBuilds;
+            gridBuild.AddComponent<BoxCollider2D>();
+            gridBuild.transform.localScale = new Vector2(0.1f, 0.1f);
             BuildingManager.Instance.buildings.Add(gridBuild.GetComponent<Building>());
         }
     }

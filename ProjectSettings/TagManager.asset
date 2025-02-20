@@ -12,7 +12,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - house
   - 
   - 
   - 
@@ -77,4 +77,7 @@ TagManager:
     locked: 0
   - name: BackGround
     uniqueID: 106839825
+    locked: 0
+  - name: Building
+    uniqueID: 2988860617
     locked: 0

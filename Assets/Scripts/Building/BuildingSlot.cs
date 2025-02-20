@@ -16,8 +16,7 @@ public class BuildingSlot : MonoBehaviour, IPointerDownHandler
         TempBuild tempBuild;
         
         tempBuild = BuildingManager.Instance.tempBuild;
-        tempBuild.GetComponent<SpriteRenderer>().sprite = buildingDetails.sprite;
-
+        tempBuild.GetComponent<Image>().sprite = buildingDetails.sprite;
         tempBuild.buildingDetails = buildingDetails;
         tempBuild.isDrag = true;
 

@@ -18,14 +18,11 @@ public class BuildingManager : Singleton<BuildingManager>
     {
         return buildingSO.BuildingList.Find(i => i.buildingID == id);
     }
-    public bool CanPlaceBuilding(int x,int y)
+    public bool CanPlaceBuilding()
     {
-        if (grid = null) return false;
-        if (grid.canPlace)
-        {
-            return grid.canPlace;
-        }
-        return true;
+        if (grid == null) return false;
+        return grid.canPlace;
+
     }
 
 }

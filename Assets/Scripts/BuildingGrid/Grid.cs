@@ -1,31 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Grid : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class Grid : MonoBehaviour
 {
-    public bool canPlace;
-    public void OnPointerEnter(PointerEventData eventData)
+    public bool canPlace = true;
+    public LayerMask houseLayerMask;
+    private void OnMouseEnter()
     {
-        var x = eventData.pointerCurrentRaycast.gameObject;
-        BuildingManager.Instance.grid = this;
+        Debug.Log("ssa");
+     BuildingManager.Instance.grid = this;
+        
     }
-
-    public void OnPointerExit(PointerEventData eventData)
+    
+    private void OnMouseExit()
     {
         BuildingManager.Instance.grid = null;
     }
 
     // Start is called before the first frame update
-    void Start()
+    private void Update()
     {
-        
+         CheckObstacle();
     }
-
-    private void UpdateSlot()
+    private void CheckObstacle()
     {
-        
+        Collider2D collider = Physics2D.OverlapCircle(transform.position, this.GetComponent<SpriteRenderer>().bounds.extents.x/1.5f, houseLayerMask);
+        if(collider != null)
+        {
+            canPlace = false;
+        }
+        else
+        {
+            canPlace = true;
+        }
     }
 }
