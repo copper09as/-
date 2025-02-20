@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.Events;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -15,7 +16,11 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private Text newsUI;
     [SerializeField] private Button closeNewsButton;
     [SerializeField] private Button openNewsButton;
-    
+    [Header("Movement Settings")]
+    [SerializeField] public UnityEvent onDayUpdated = new UnityEvent();
+    [SerializeField] private PlayerMovement playerMovement;
+
+
     private int _day;
     private Dictionary<int, int> itemBasePrices = new Dictionary<int, int>(); // 存储物品初始价格
 
@@ -105,7 +110,8 @@ public class GameManager : Singleton<GameManager>
         day++;          // 进入下一天
         InventoryManager.Instance.BuildinGain();
         newsPanel.SetActive(true); // 显示新闻面板
-        
+        onDayUpdated.Invoke();
+
 
     }
 
@@ -144,4 +150,10 @@ public class GameManager : Singleton<GameManager>
 
     private void CloseNews() => newsPanel.SetActive(false);
     private void OpenNews() => newsPanel.SetActive(true);
+
+    // 新增方法
+    public void TryMoveToLocation(MapLocation targetLocation)
+    {
+        playerMovement.TryMoveToLocation(targetLocation);
+    }
 }
