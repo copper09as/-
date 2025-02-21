@@ -9,6 +9,7 @@ public class Grid : MonoBehaviour
 {
     public bool canPlace = true;
     public LayerMask houseLayerMask;
+    public Vector2 transPosition;
     private void OnMouseEnter()
     {
         Debug.Log("ssa");

@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 
 public class BuildingManager : Singleton<BuildingManager>
@@ -18,11 +16,38 @@ public class BuildingManager : Singleton<BuildingManager>
     {
         return buildingSO.BuildingList.Find(i => i.buildingID == id);
     }
-    public bool CanPlaceBuilding()
+    public bool CanPlaceBuilding(List<Vector2> areaPosition)
     {
         if (grid == null) return false;
-        return grid.canPlace;
+        foreach (var area in areaPosition)
+        {
+            var addPosition = area + grid.transPosition;
+            if (addPosition.x < 0 || addPosition.y < 0)
+            {
+                Debug.Log("越界");
+                return false;
+            }
+            try
+            {
+                if (gridSlot.grids.Find(i => i.transPosition == addPosition).canPlace == false)
+                {
+                    Debug.Log("不可放置");
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
+            }
 
+            }
+
+        /*catch
+        {
+            Debug.Log("错误");
+            return false;
+        }*/
+        return true;
     }
 
 }

@@ -5523,6 +5523,10 @@ MonoBehaviour:
   newsUI: {fileID: 2067846438}
   closeNewsButton: {fileID: 1509520060}
   openNewsButton: {fileID: 1844394628}
+  onDayUpdated:
+    m_PersistentCalls:
+      m_Calls: []
+  playerMovement: {fileID: 0}
   familyStatus: 0
   startingMoney: 0
 --- !u!1 &1370429170
@@ -5653,7 +5657,7 @@ MonoBehaviour:
   buildings: []
   tempBuild: {fileID: 535461977}
   GridBuilds: {fileID: 253410476}
-  gridSlot: {fileID: 0}
+  gridSlot: {fileID: 1750203487}
   grid: {fileID: 0}
   isDrag: 0
 --- !u!114 &1371467860 stripped
@@ -8179,6 +8183,7 @@ MonoBehaviour:
   houseLayerMask:
     serializedVersion: 2
     m_Bits: 64
+  transPosition: {x: 0, y: 0}
 --- !u!1 &1998044379
 GameObject:
   m_ObjectHideFlags: 0

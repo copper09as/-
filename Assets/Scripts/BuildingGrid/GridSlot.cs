@@ -10,7 +10,7 @@ public class GridSlot : MonoBehaviour
     [SerializeField] int gridNumeber = 52;
     [SerializeField] private int witdh;
     [SerializeField] private int height;
-    [SerializeField] List<Grid> grids;
+    public List<Grid> grids;
     [SerializeField] private float interval;
     void Start()
     {
@@ -29,8 +29,8 @@ public class GridSlot : MonoBehaviour
                 transform.position.x + interval * (i % witdh)
                 , transform.position.y - interval *(i % height)
                 );
-            
-            grid.name = "grid";
+            grid.GetComponent<Grid>().transPosition = new Vector2(i % witdh,i % height);
+            grid.name = grid.GetComponent<Grid>().transPosition.ToString();
         }
         Destroy(transform.GetChild(0).gameObject);
 

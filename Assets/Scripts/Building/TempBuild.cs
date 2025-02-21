@@ -28,7 +28,7 @@ public class TempBuild : MonoBehaviour
         if(isDrag)
             this.transform.position = Input.mousePosition;
         if (Input.GetMouseButtonDown(1)) isDrag = false;
-        if (Input.GetMouseButtonDown(0) && BuildingManager.Instance.CanPlaceBuilding())
+        if (Input.GetMouseButtonDown(0) && BuildingManager.Instance.CanPlaceBuilding(buildingDetails.areaGrid))
         {
             isDrag = false;
             GameObject gridBuild = new GameObject();
@@ -41,6 +41,7 @@ public class TempBuild : MonoBehaviour
             gridBuild.transform.parent = BuildingManager.Instance.GridBuilds;
             gridBuild.AddComponent<BoxCollider2D>();
             gridBuild.transform.localScale = new Vector2(0.1f, 0.1f);
+            gridBuild.GetComponent<Building>().isPlace = true;
             BuildingManager.Instance.buildings.Add(gridBuild.GetComponent<Building>());
         }
     }
