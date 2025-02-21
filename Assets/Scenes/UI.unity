@@ -2267,6 +2267,7 @@ MonoBehaviour:
   buildingDetails:
     buildingID: 0
     areaGrid: []
+    centerPosition: {x: 0, y: 0}
     price: 0
     gain: 0
     sprite: {fileID: 0}
@@ -3509,6 +3510,7 @@ MonoBehaviour:
   buildingDetails:
     buildingID: 0
     areaGrid: []
+    centerPosition: {x: 0, y: 0}
     price: 0
     gain: 0
     sprite: {fileID: 0}
@@ -8179,7 +8181,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa77655445d76f642902aa7e0453ee40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canPlace: 1
+  _canPlace: 0
+  initColor: {r: 0.96981126, g: 0.96981126, b: 0.96981126, a: 0.047058824}
+  transColor: {r: 1, g: 0, b: 0, a: 0.047058824}
   houseLayerMask:
     serializedVersion: 2
     m_Bits: 64

@@ -2,8 +2,17 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-public class UIManager : MonoBehaviour
+public class UIManager : Singleton<UIManager>
 {
+    public enum SceneState
+    { 
+        Trade,
+        Building,
+        Map,
+        DragBuilding,
+        NextDayUi,
+
+    }
     public GameObject mainUI;
     // 用于存储所有需要切换的UI画布
     [System.Serializable]
@@ -16,7 +25,7 @@ public class UIManager : MonoBehaviour
 
     [Header("UI管理")]
     public List<UICanvas> uiCanvases = new List<UICanvas>();
-
+ 
     private void Start()
     {
         // 确保 MainUI 在其父物体中的最上层

@@ -29,6 +29,7 @@ public class GridSlot : MonoBehaviour
                 transform.position.x + interval * (i % witdh)
                 , transform.position.y - interval *(i % height)
                 );
+            grid.GetComponent<Grid>().canPlace = true;
             grid.GetComponent<Grid>().transPosition = new Vector2(i % witdh,i % height);
             grid.name = grid.GetComponent<Grid>().transPosition.ToString();
         }

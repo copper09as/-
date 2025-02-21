@@ -7,7 +7,24 @@ using UnityEngine.EventSystems;
 
 public class Grid : MonoBehaviour
 {
-    public bool canPlace = true;
+    [SerializeField] private bool _canPlace;
+    [SerializeField] private Color initColor;
+    [SerializeField] private Color transColor;
+    public bool canPlace
+    { 
+        get
+        {
+            return _canPlace;
+        }
+        set
+        {
+            _canPlace = value;
+            if(value)
+            GetComponent<SpriteRenderer>().color = initColor;
+            else
+            GetComponent<SpriteRenderer>().color = transColor;
+        }
+    }
     public LayerMask houseLayerMask;
     public Vector2 transPosition;
     private void OnMouseEnter()

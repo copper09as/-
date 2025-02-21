@@ -6,16 +6,30 @@ namespace MFarm.Inventory
 {
     public class InventoryManager : Singleton<InventoryManager>
     {
+        
         [Header("物品数据")]
         public ItemDataList_SO itemDataList_SO;
 
         [Header("背包数据")]
         public InventoryBag_SO playerBag;
         private InventoryBag_SO currentBoxBag;
-
         [Header("交易")]
-        public int playerMoney;
-        [Header("建筑")]
+        [SerializeField]private int _playerMoney;
+
+        public int playerMoney
+        {
+            
+            get
+            {
+                return _playerMoney;
+            }   
+            set
+            {
+                _playerMoney = value;
+                EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.itemList);
+            }
+        }
+            [Header("建筑")]
         [SerializeField] private BuildingUI buildingUi;
         private void Start()
         {
