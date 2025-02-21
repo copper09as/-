@@ -13,11 +13,11 @@ public class BuildingSlot : MonoBehaviour, IPointerDownHandler
     public void OnPointerDown(PointerEventData eventData)
     {
         if (!isFinish) return;
-        TempBuild tempBuild;
-        tempBuild = BuildingManager.Instance.tempBuild;
-        tempBuild.GetComponent<Image>().sprite = buildingDetails.sprite;
-        tempBuild.buildingDetails = buildingDetails;
-        tempBuild.isDrag = true;
+
+        TempBuilder<TempBuild> tempBuilder = new TempBuilder<TempBuild>();
+        tempBuilder.Create(BuildingManager.Instance.tempBuild);
+        tempBuilder.AddSprite(buildingDetails.sprite);
+        tempBuilder.SetDetails(buildingDetails);
 
     }
     private void Start()

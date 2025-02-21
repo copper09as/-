@@ -10,11 +10,15 @@ public class Building : MonoBehaviour
     private void OnMouseDown()
     {
         if (!isPlace) return;
-        TempBuild tempBuild;
+        TempBuilder<TempBuild> tempBuilder = new TempBuilder<TempBuild>();
+        tempBuilder.Create(BuildingManager.Instance.tempBuild);
+        tempBuilder.AddSprite(buildingDetails.sprite);
+        tempBuilder.SetDetails(buildingDetails);
+        /*TempBuild tempBuild;
         tempBuild = BuildingManager.Instance.tempBuild;
         tempBuild.GetComponent<Image>().sprite = buildingDetails.sprite;
         tempBuild.buildingDetails = buildingDetails;
-        tempBuild.isDrag = true;
+        tempBuild.isDrag = true;*/
         Destroy(gameObject);
     }
 }

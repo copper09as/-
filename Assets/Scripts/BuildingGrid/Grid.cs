@@ -25,7 +25,7 @@ public class Grid : MonoBehaviour
     // Start is called before the first frame update
     private void Update()
     {
-         CheckObstacle();
+         //CheckObstacle();
     }
     private void CheckObstacle()
     {

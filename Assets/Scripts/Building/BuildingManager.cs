@@ -47,6 +47,11 @@ public class BuildingManager : Singleton<BuildingManager>
             Debug.Log("´íÎó");
             return false;
         }*/
+        foreach(var area in areaPosition)
+        {
+            var addPosition = area + grid.transPosition;
+            gridSlot.grids.Find(i => i.transPosition == addPosition).canPlace = false;
+        }
         return true;
     }
 
