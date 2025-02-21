@@ -24,9 +24,10 @@ public class BuildingBuilder<T> : Builder<T> where T :Building
         gridBuild.transform.localScale = scale;
         gridBuild.layer = layer;
     }
-    public override void Create(Transform transform)
+    public override void Create(Transform transform,Vector2 centerPosition)
     {
         gridBuild.transform.parent = transform;
+        gridBuild.GetComponent<Building>().centerGrid = centerPosition;
         gridBuild.AddComponent<PolygonCollider2D>();
         gridBuild.GetComponent<T>().isPlace = true;
         BuildingManager.Instance.buildings.Add(gridBuild.GetComponent<Building>());
@@ -40,6 +41,11 @@ public class BuildingBuilder<T> : Builder<T> where T :Building
     }
 
     public override void Create(T build)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void Create(Transform transform)
     {
         throw new System.NotImplementedException();
     }

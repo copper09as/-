@@ -8,6 +8,7 @@ public class BuildingDetails
 {
     public int buildingID;
     public List<Vector2> areaGrid;
+    public Vector2 centerPosition;
     public int price;
     public int gain;
     public Sprite sprite;

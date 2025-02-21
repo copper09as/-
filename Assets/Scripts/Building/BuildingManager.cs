@@ -54,5 +54,12 @@ public class BuildingManager : Singleton<BuildingManager>
         }
         return true;
     }
-
+    public void ClearGird(List<Vector2> areaPosition,Vector2 centerPosition)
+    {
+        foreach (var area in areaPosition)
+        {
+            var addPosition = area + centerPosition;
+            gridSlot.grids.Find(i => i.transPosition == addPosition).canPlace = true;
+        }
+    }
 }
