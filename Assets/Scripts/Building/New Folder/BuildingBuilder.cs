@@ -49,7 +49,6 @@ public class BuildingBuilder<T> : Builder<T> where T :Building
         gridBuild.GetComponent<T>().isPlace = true;
         BuildingManager.Instance.buildings.Add(gridBuild.GetComponent<Building>());
     }
-
     public override void Create(T build)
     {
         throw new System.NotImplementedException();

@@ -19,6 +19,9 @@ public class GameManager : Singleton<GameManager>
     [Header("Movement Settings")]
     [SerializeField] public UnityEvent onDayUpdated = new UnityEvent();
     [SerializeField] private PlayerMovement playerMovement;
+    [SerializeField] private Button settingButton;  // 设置按钮
+    [SerializeField] private Button closeSettingsButton;  // 关闭设置按钮
+    [SerializeField] private GameObject settingPanel;  // 设置面板
 
 
     private int _day;
@@ -44,6 +47,8 @@ public class GameManager : Singleton<GameManager>
         nextDayButton.onClick.AddListener(DayUpdate);
         closeNewsButton.onClick.AddListener(CloseNews);
         openNewsButton.onClick.AddListener(OpenNews);
+        settingButton.onClick.AddListener(OpenSettings);
+        closeSettingsButton.onClick.AddListener(CloseSettings);  // 关闭设置按钮点击事件
         day = 1;
         InventoryManager.Instance.ClearInventory();
 
@@ -62,6 +67,7 @@ public class GameManager : Singleton<GameManager>
             details.transPrice = details.itemPrice;           // 设置当前交易价格
         }
         newsPanel.SetActive(true);
+        settingPanel.SetActive(false);
     }
 
     // 随机选择家庭状况
@@ -156,5 +162,16 @@ public class GameManager : Singleton<GameManager>
     public void TryMoveToLocation(MapLocation targetLocation)
     {
         playerMovement.TryMoveToLocation(targetLocation);
+        
+    }
+    private void OpenSettings()
+    {
+        settingPanel.SetActive(true);  // 显示设置面板
+    }
+
+    // 关闭设置面板
+    private void CloseSettings()
+    {
+        settingPanel.SetActive(false);  // 隐藏设置面板
     }
 }
