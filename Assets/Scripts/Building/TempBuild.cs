@@ -13,6 +13,7 @@ public class TempBuild : MonoBehaviour
         set
         {
             _isDrag = value;
+            this.transform.position = Input.mousePosition;
             gameObject.SetActive(value);
             BuildingManager.Instance.isDrag = value;
 
@@ -31,7 +32,7 @@ public class TempBuild : MonoBehaviour
             builder.AddSprite(GetComponent<UnityEngine.UI.Image>().sprite);
             builder.SetDetails(buildingDetails);
             builder.SetTrans(BuildingManager.Instance.grid.transform.position, new Vector2(0.1f, 0.1f), 6);
-            builder.Create(BuildingManager.Instance.GridBuilds,BuildingManager.Instance.grid.transPosition);
+            builder.Create(BuildingManager.Instance.GridBuilds,BuildingManager.Instance.grid.transPosition,false);
             /*GameObject gridBuild = new GameObject();
             gridBuild.AddComponent<SpriteRenderer>();
             gridBuild.GetComponent<SpriteRenderer>().sprite = GetComponent<UnityEngine.UI.Image>().sprite;

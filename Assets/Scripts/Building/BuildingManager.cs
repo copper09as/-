@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class BuildingManager : Singleton<BuildingManager>
@@ -12,6 +14,38 @@ public class BuildingManager : Singleton<BuildingManager>
     public GridSlot gridSlot;
     public Grid grid;
     public bool isDrag;
+    public BuildingSave buildingSave;
+    public Button saveButton;
+    private void Start()
+    {
+        saveButton.onClick.AddListener(OnSave);
+        buildingSave = GameSave.LoadByJson<BuildingSave>("Load1.json");
+    
+            foreach (var loadBuilding in buildingSave.buildingIDs)
+            {
+                Debug.Log(buildingSave.buildingIDs.Count);
+                BuildingBuilder<Building> builder = new BuildingBuilder<Building>();
+                builder.AddSprite(GetId(loadBuilding.buildingID).sprite);
+                builder.SetDetails(GetId(loadBuilding.buildingID));
+                builder.SetTrans(gridSlot.grids.Find(i => i.transPosition == loadBuilding.pos).transform.position, new Vector2(0.1f, 0.1f), 6);
+                builder.Create(BuildingManager.Instance.GridBuilds, GetId(loadBuilding.buildingID).centerPosition,true);
+                foreach (var area in GetId(loadBuilding.buildingID).areaGrid)
+                {
+                    var addPosition = area + loadBuilding.pos;
+                    gridSlot.grids.Find(i => i.transPosition == addPosition).canPlace = false;
+                }
+            }
+        
+
+
+    }
+    private void OnSave()
+    {
+        GameSave.SaveByJson("Load1.json", this.buildingSave);
+        Debug.Log(JsonUtility.ToJson(buildingSave));
+        
+    }
+
     public BuildingDetails GetId(int id)
     {
         return buildingSO.BuildingList.Find(i => i.buildingID == id);

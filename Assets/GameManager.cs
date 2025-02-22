@@ -53,6 +53,7 @@ public class GameManager : Singleton<GameManager>
 
     private void Start()
     {
+        
         // 初始化所有物品的初始价格
         foreach (var item in shop.shopData.itemList)
         {

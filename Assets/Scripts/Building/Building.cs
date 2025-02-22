@@ -6,8 +6,21 @@ using UnityEngine.UI;
 public class Building : MonoBehaviour
 {
     public BuildingDetails buildingDetails;
+    public BuildingID buildingID;
     public bool isPlace;
     public Vector2 centerGrid;
+    private void OnDisable()
+    {
+        BuildingManager.Instance.buildingSave.buildingIDs.Remove(buildingID);
+    }
+    private void Start()
+    {
+        this.buildingID.buildingID = buildingDetails.buildingID;
+        this.buildingID.isFinish = 0;
+        this.buildingID.pos = centerGrid;
+       
+    }
+
     private void OnMouseDown()
     {
         try

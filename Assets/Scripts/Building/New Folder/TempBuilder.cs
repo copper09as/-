@@ -29,7 +29,7 @@ public class TempBuilder<T> : Builder<T> where T : TempBuild
         
     }
 
-    public override void Create(Transform transform, Vector2 centerPosition)
+    public override void Create(Transform transform, Vector2 centerPosition,bool isLoad)
     {
         throw new System.NotImplementedException();
     }

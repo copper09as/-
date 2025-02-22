@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
@@ -13,13 +14,13 @@ public class BuildingDetails
     public int gain;
     public Sprite sprite;
     public string name;
-
 }
 [System.Serializable]
 public struct BuildingID
 {
     public int buildingID; // д╛хо0
     public int isFinish;
+    public Vector2 pos;
 
 
 }

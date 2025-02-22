@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public abstract class Builder<T> : MonoBehaviour
 {
     public abstract void Create(Transform transform);
-    public abstract void Create(Transform transform, Vector2 centerPosition);
+    public abstract void Create(Transform transform, Vector2 centerPosition, bool isLoad);
     public abstract void Create();
     public abstract void Create(T build);
     public abstract void AddSprite(Sprite sprite);

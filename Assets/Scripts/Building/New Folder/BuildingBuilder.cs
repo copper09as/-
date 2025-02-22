@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class BuildingBuilder<T> : Builder<T> where T :Building
 {
     GameObject gridBuild = new GameObject();
-
+    BuildingID buildingID = new BuildingID();
 
     public override void AddSprite(Sprite sprite)
     {
@@ -17,6 +17,7 @@ public class BuildingBuilder<T> : Builder<T> where T :Building
     {
         gridBuild.AddComponent<T>();
         gridBuild.GetComponent<T>().buildingDetails = buildingDetails;
+        buildingID.buildingID = buildingDetails.buildingID;
     }
     public override void SetTrans(Vector2 position, Vector2 scale,LayerMask layer)
     {
@@ -24,10 +25,19 @@ public class BuildingBuilder<T> : Builder<T> where T :Building
         gridBuild.transform.localScale = scale;
         gridBuild.layer = layer;
     }
-    public override void Create(Transform transform,Vector2 centerPosition)
+    public override void Create(Transform transform,Vector2 centerPosition,bool isLoad)
     {
+        if(!isLoad)
+        {
+           
+            buildingID.isFinish = 0;
+            buildingID.pos = centerPosition;
+            BuildingManager.Instance.buildingSave.buildingIDs.Add(buildingID);
+        }
+       
         gridBuild.transform.parent = transform;
         gridBuild.GetComponent<Building>().centerGrid = centerPosition;
+        gridBuild.GetComponent<Building>().buildingID.pos = centerPosition;
         gridBuild.AddComponent<PolygonCollider2D>();
         gridBuild.GetComponent<T>().isPlace = true;
         BuildingManager.Instance.buildings.Add(gridBuild.GetComponent<Building>());
