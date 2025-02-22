@@ -29,7 +29,6 @@ public class Grid : MonoBehaviour
     public Vector2 transPosition;
     private void OnMouseEnter()
     {
-        Debug.Log("ssa");
      BuildingManager.Instance.grid = this;
         
     }
