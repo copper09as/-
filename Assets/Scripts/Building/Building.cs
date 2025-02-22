@@ -11,7 +11,8 @@ public class Building : MonoBehaviour
     public Vector2 centerGrid;
     private void OnDisable()
     {
-        BuildingManager.Instance.buildingSave.buildingIDs.Remove(buildingID);
+        var id = SaveManager.Instance.buildingSave.buildingIDs.Find(i => i.pos == buildingID.pos);
+        SaveManager.Instance.buildingSave.buildingIDs.Remove(id);
     }
     private void Start()
     {

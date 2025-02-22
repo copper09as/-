@@ -26,11 +26,12 @@ namespace MFarm.Inventory
             set
             {
                 _playerMoney = value;
+                
                 EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.itemList);
             }
         }
             [Header("½¨Öþ")]
-        [SerializeField] private BuildingUI buildingUi;
+        public BuildingUI buildingUi;
         private void Start()
         {
             DontDestroyOnLoad(Instance);

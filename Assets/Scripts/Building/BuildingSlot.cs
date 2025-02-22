@@ -24,6 +24,7 @@ public class BuildingSlot : MonoBehaviour, IPointerDownHandler
     {
         this.buildButton = this.transform.GetChild(0).gameObject.GetComponent<Button>();
         buildButton.onClick.AddListener(StartBuild);
+        
 
     }
     public void UpdateSlot()

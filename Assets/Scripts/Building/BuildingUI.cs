@@ -26,11 +26,7 @@ public class BuildingUI : MonoBehaviour
             Debug.Log("建筑管理器单例未获取");
             return;
         }
-        while(slots.Count < details.Count)
-        {
-            var slot = Instantiate(slots[0], this.transform);
-            slots.Add(slot);
-        }
+
         for (int i = 0; i < slots.Count; i++)
         {
             var slot = slots[i];

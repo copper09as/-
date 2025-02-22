@@ -32,7 +32,7 @@ public class BuildingBuilder<T> : Builder<T> where T :Building
            
             buildingID.isFinish = 0;
             buildingID.pos = centerPosition;
-            BuildingManager.Instance.buildingSave.buildingIDs.Add(buildingID);
+            SaveManager.Instance.buildingSave.buildingIDs.Add(buildingID);
         }
        
         gridBuild.transform.parent = transform;
