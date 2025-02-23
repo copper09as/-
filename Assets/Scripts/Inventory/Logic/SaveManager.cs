@@ -1,7 +1,7 @@
 using MFarm.Inventory;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections.Generic;
 
 public class SaveManager : Singleton<SaveManager>
 {
@@ -10,24 +10,13 @@ public class SaveManager : Singleton<SaveManager>
 
     void Start()
     {
-        // 确保buildingSave初始化
-        buildingSave = new BuildingSave()
-        {
-            buildingIDs = new List<BuildingID>(),
-            buildingSlots = new List<bool>(),
-            playerMoney = 0
-        };
-
         saveButton.onClick.AddListener(OnSave);
-        Load();
+        Load(); // 先尝试加载存档
     }
 
     private void Load()
     {
-        // 尝试加载存档
         var tempSave = GameSave.LoadByJson<BuildingSave>("Load1.json");
-
-        // 处理首次加载情况
         if (tempSave == null)
         {
             Debug.Log("No save found, creating new game");
@@ -37,17 +26,15 @@ public class SaveManager : Singleton<SaveManager>
 
         buildingSave = tempSave;
 
-        // 确保buildingSlots初始化
+        // 确保列表初始化
         if (buildingSave.buildingSlots == null)
             buildingSave.buildingSlots = new List<bool>();
 
-        // 初始化建筑
-        if (buildingSave.buildingIDs != null)
-        {
+
+        // 重建建筑
+
             foreach (var loadBuilding in buildingSave.buildingIDs)
             {
-                if (BuildingManager.Instance == null) continue;
-
                 var buildingData = BuildingManager.Instance.GetId(loadBuilding.buildingID);
                 if (buildingData == null) continue;
 
@@ -60,8 +47,10 @@ public class SaveManager : Singleton<SaveManager>
                 {
                     builder.SetTrans(targetGrid.transform.position, new Vector2(0.1f, 0.1f), 6);
                     builder.Create(BuildingManager.Instance.GridBuilds, loadBuilding.pos, true);
-                }
+                    SaveManager.Instance.buildingSave.buildingIDs.Add(builder.buildingID);
+            }
 
+                // 更新区域网格状态
                 if (buildingData.areaGrid != null)
                 {
                     foreach (var area in buildingData.areaGrid)
@@ -72,17 +61,11 @@ public class SaveManager : Singleton<SaveManager>
                     }
                 }
             }
-        }
+        
 
-        // 处理buildingSlots
+        // 更新槽位状态
         if (InventoryManager.Instance?.buildingUi?.slots != null)
         {
-            // 修复循环结构
-            while (buildingSave.buildingSlots.Count < InventoryManager.Instance.buildingUi.slots.Count)
-            {
-                buildingSave.buildingSlots.Add(false);
-            }
-
             for (int i = 0; i < InventoryManager.Instance.buildingUi.slots.Count; i++)
             {
                 if (i < buildingSave.buildingSlots.Count)
@@ -93,7 +76,7 @@ public class SaveManager : Singleton<SaveManager>
             }
         }
 
-        // 初始化金钱
+        // 更新金钱
         if (InventoryManager.Instance != null)
         {
             InventoryManager.Instance.playerMoney = buildingSave.playerMoney;
@@ -102,7 +85,6 @@ public class SaveManager : Singleton<SaveManager>
 
     private void InitNewGame()
     {
-        // 初始化全新游戏数据
         buildingSave = new BuildingSave()
         {
             buildingIDs = new List<BuildingID>(),
@@ -110,13 +92,14 @@ public class SaveManager : Singleton<SaveManager>
             playerMoney = 0
         };
 
-        // 初始化建筑槽位
+        // 初始化槽位
         if (InventoryManager.Instance?.buildingUi?.slots != null)
         {
             foreach (var slot in InventoryManager.Instance.buildingUi.slots)
             {
                 slot.isFinish = false;
                 slot.UpdateSlot();
+                buildingSave.buildingSlots.Add(false); // 同步到存档
             }
         }
     }
@@ -125,16 +108,19 @@ public class SaveManager : Singleton<SaveManager>
     {
         if (buildingSave == null) return;
 
-        // 保存金钱
+        // 更新建筑数据
+       
+
+        // 更新金钱
         if (InventoryManager.Instance != null)
         {
             buildingSave.playerMoney = InventoryManager.Instance.playerMoney;
         }
 
-        // 保存建筑状态
+        // 更新槽位状态
         if (InventoryManager.Instance?.buildingUi?.slots != null)
         {
-            buildingSave.buildingSlots = new List<bool>();
+            buildingSave.buildingSlots.Clear();
             foreach (var slot in InventoryManager.Instance.buildingUi.slots)
             {
                 buildingSave.buildingSlots.Add(slot.isFinish);
