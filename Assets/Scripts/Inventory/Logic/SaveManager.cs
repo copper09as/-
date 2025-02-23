@@ -1,5 +1,6 @@
-using System.Collections.Generic;
 using MFarm.Inventory;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,14 +8,32 @@ public class SaveManager : Singleton<SaveManager>
 {
     public BuildingSave buildingSave;
     public Button saveButton;
+    public GameObject loadingPanel; // 可选加载界面
 
     void Start()
     {
         saveButton.onClick.AddListener(OnSave);
-        Load(); // 先尝试加载存档
-        Debug.Log(buildingSave.buildingIDs.Count);
+        StartCoroutine(LoadAfterDelay(0.1f)); // 延迟2秒加载
+    }
 
+    private IEnumerator LoadAfterDelay(float delay)
+    {
+        // 显示加载界面
+        if (loadingPanel != null)
+        {
+            loadingPanel.SetActive(true);
+        }
 
+        Debug.Log("Loading game after " + delay + " seconds...");
+        yield return null;
+
+        Load();
+
+        // 隐藏加载界面
+        if (loadingPanel != null)
+        {
+            loadingPanel.SetActive(false);
+        }
     }
 
     private void Load()
@@ -24,19 +43,16 @@ public class SaveManager : Singleton<SaveManager>
         {
             Debug.Log("No save found, creating new game");
             InitNewGame();
-
             return;
         }
 
-        this.buildingSave = tempSave;
+        buildingSave = tempSave;
 
         // 确保列表初始化
         if (buildingSave.buildingSlots == null)
             buildingSave.buildingSlots = new List<bool>();
 
-
         // 重建建筑
-
         foreach (var loadBuilding in buildingSave.buildingIDs)
         {
             var buildingData = BuildingManager.Instance.GetId(loadBuilding.buildingID);
@@ -65,8 +81,6 @@ public class SaveManager : Singleton<SaveManager>
             }
         }
 
-
-
         // 更新槽位状态
         if (InventoryManager.Instance?.buildingUi?.slots != null)
         {
@@ -87,6 +101,7 @@ public class SaveManager : Singleton<SaveManager>
         }
     }
 
+  
     private void InitNewGame()
     {
         buildingSave = new BuildingSave()
@@ -110,10 +125,11 @@ public class SaveManager : Singleton<SaveManager>
 
     private void OnSave()
     {
+
         if (buildingSave == null) return;
 
         // 更新建筑数据
-
+       
 
         // 更新金钱
         if (InventoryManager.Instance != null)

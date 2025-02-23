@@ -1368,7 +1368,7 @@ Transform:
   m_GameObject: {fileID: 253410475}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -673.234, y: -385.56467, z: 0.010066342}
+  m_LocalPosition: {x: -638.78, y: -401.81003, z: 0.010066342}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8836,8 +8836,8 @@ Transform:
   m_GameObject: {fileID: 1701743576}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -349.68304, y: -164.73578, z: 0}
-  m_LocalScale: {x: 4.632679, y: 2.5872202, z: 2.3981357}
+  m_LocalPosition: {x: -320, y: -180.07002, z: 0}
+  m_LocalScale: {x: 4.5220366, y: 2.5254295, z: 2.3408608}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1755694831}
@@ -8920,7 +8920,7 @@ Transform:
   m_GameObject: {fileID: 1750203484}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -357.01, y: -163.35, z: 0}
+  m_LocalPosition: {x: -322.55606, y: -179.59537, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8940,10 +8940,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridNumeber: 65
-  witdh: 13
+  witdh: 9
   height: 4
   grids: []
-  interval: 1.2
+  interval: 0.6
 --- !u!1 &1755694830
 GameObject:
   m_ObjectHideFlags: 0
@@ -9179,7 +9179,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1800316807
 Transform:
   m_ObjectHideFlags: 0
@@ -10041,6 +10041,7 @@ MonoBehaviour:
     playerMoney: 0
     buildingSlots: 
   saveButton: {fileID: 1123707324}
+  loadingPanel: {fileID: 0}
 --- !u!1 &1949955415
 GameObject:
   m_ObjectHideFlags: 0
@@ -10381,7 +10382,7 @@ RectTransform:
   m_GameObject: {fileID: 1968034545}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 2.1009707}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1750203486}
@@ -11149,12 +11150,12 @@ MonoBehaviour:
   - canvasName: Trade
     canvasObject: {fileID: 1949955415}
     button: {fileID: 1046543011}
-  - canvasName: Building
-    canvasObject: {fileID: 1755694830}
-    button: {fileID: 781804493}
   - canvasName: Map
     canvasObject: {fileID: 1800316806}
     button: {fileID: 1046458368}
+  - canvasName: Building
+    canvasObject: {fileID: 1755694830}
+    button: {fileID: 781804493}
 --- !u!1 &1317612568482778042
 GameObject:
   m_ObjectHideFlags: 0

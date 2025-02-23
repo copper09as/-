@@ -37,7 +37,7 @@ public class UIManager : Singleton<UIManager>
         }
 
         // 初始时设置默认显示的UI画布
-        SetActiveCanvas("Map"); // 比如默认为 Map 画布
+        SetActiveCanvas("Building"); // 比如默认为 Map 画布
     }
 
     /// <summary>

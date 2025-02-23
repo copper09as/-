@@ -11,6 +11,7 @@ public class GameSave : MonoBehaviour
         var path = Path.Combine(Application.persistentDataPath, saveFilename);
         try
         {
+           
             File.WriteAllText(path, json);
             Debug.Log($"成功存储在{path}");
         }
@@ -41,7 +42,7 @@ public class GameSave : MonoBehaviour
     public static void DeleteFile(string saveFilename)
     {
         var path = Path.Combine(Application.persistentDataPath, saveFilename);
-        try { File.Delete(path); }
+        try { File.Delete(path);Debug.Log("成功删除"); }
         catch (System.Exception exception)
         {
             Debug.Log($"在{path}删除失败\n {exception}");
