@@ -12,6 +12,8 @@ namespace MFarm.Inventory
         [SerializeField] private TextMeshProUGUI amountText;
         [SerializeField] public Image slotHighlight;
         [SerializeField] private Button button;
+        public Text itemNameText; // 显示物品名字
+        public Text itemPriceText; // 显示物品价格
 
         [Header("格子类型")]
         public SlotType slotType;
@@ -58,9 +60,23 @@ namespace MFarm.Inventory
             itemDetails = item;
             slotImage.sprite = item.itemIcon;
             itemAmount = amount;
-
+            if (itemPriceText == null)
+                try
+                {
+                    itemPriceText = GameObject.Find("Price").GetComponent<Text>();
+                }
+                catch
+                {
+                    itemPriceText = GameObject.Find(item.itemName + "Text").GetComponent<Text>();
+                }
+                
+            itemPriceText.name = item.itemName + "Text";
+            itemPriceText = GameObject.Find(item.itemName + "Text").GetComponent<Text>();
+            if (item == null) Debug.Log("iyempTextNull");
+            itemPriceText.text = item.transPrice.ToString();
             slotImage.enabled = true;
             button.interactable = true;
+            Debug.Log(item.transPrice.ToString());
         }
 
         /// <summary>
