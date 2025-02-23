@@ -11,6 +11,7 @@ public class BuildingBuilder<T> : Builder<T> where T :Building
     public override void AddSprite(Sprite sprite)
     {
         gridBuild.AddComponent<SpriteRenderer>();
+        gridBuild.GetComponent<SpriteRenderer>().sortingLayerName = "Building";
         gridBuild.GetComponent<SpriteRenderer>().sprite = sprite;
     }
     public override void SetDetails(BuildingDetails buildingDetails)

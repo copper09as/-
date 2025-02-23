@@ -20,9 +20,17 @@ public class Grid : MonoBehaviour
         {
             _canPlace = value;
             if(value)
-            GetComponent<SpriteRenderer>().color = initColor;
+            {
+                GetComponent<SpriteRenderer>().color = initColor;
+                GetComponent<SpriteRenderer>().sortingLayerName = "Default";
+            }
+            
             else
-            GetComponent<SpriteRenderer>().color = transColor;
+            {
+                GetComponent<SpriteRenderer>().color = transColor;
+                GetComponent<SpriteRenderer>().sortingLayerName = "Grid";
+            }
+
         }
     }
     public LayerMask houseLayerMask;

@@ -78,6 +78,9 @@ TagManager:
   - name: BackGround
     uniqueID: 106839825
     locked: 0
+  - name: Grid
+    uniqueID: 637118007
+    locked: 0
   - name: Building
     uniqueID: 2988860617
     locked: 0

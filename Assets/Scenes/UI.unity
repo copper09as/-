@@ -8943,7 +8943,7 @@ MonoBehaviour:
   witdh: 13
   height: 4
   grids: []
-  interval: 0.6
+  interval: 1.2
 --- !u!1 &1755694830
 GameObject:
   m_ObjectHideFlags: 0
@@ -10449,8 +10449,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canPlace: 0
-  initColor: {r: 0.86065775, g: 1, b: 0.3915094, a: 0.42745098}
-  transColor: {r: 1, g: 0.08018869, b: 0.08018869, a: 0.7019608}
+  initColor: {r: 1, g: 1, b: 1, a: 1}
+  transColor: {r: 0, g: 0, b: 0, a: 1}
   houseLayerMask:
     serializedVersion: 2
     m_Bits: 64
