@@ -15,7 +15,10 @@ namespace MFarm.Inventory
         private InventoryBag_SO currentBoxBag;
         [Header("交易")]
         [SerializeField]private int _playerMoney;
-
+        protected override void Awake()
+        {
+            base.Awake();
+        }
         public int playerMoney
         {
             
@@ -34,7 +37,6 @@ namespace MFarm.Inventory
         public BuildingUI buildingUi;
         private void Start()
         {
-            DontDestroyOnLoad(Instance);
             // 初始化背包
             EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.itemList);
         }

@@ -50,15 +50,16 @@ public class GameManager : Singleton<GameManager>
         settingButton.onClick.AddListener(OpenSettings);
         closeSettingsButton.onClick.AddListener(CloseSettings);  // 关闭设置按钮点击事件
         day = 1;
-        InventoryManager.Instance.ClearInventory();
+        
 
         // 每局游戏开始时随机选择家庭状况
-        RandomizeFamilyStatus();
+        
     }
 
     private void Start()
     {
-        
+        InventoryManager.Instance.ClearInventory();
+        RandomizeFamilyStatus();
         // 初始化所有物品的初始价格
         foreach (var item in shop.shopData.itemList)
         {
@@ -99,6 +100,7 @@ public class GameManager : Singleton<GameManager>
         }
 
         // 设置初始金钱
+        if (InventoryManager.Instance == null) Debug.Log("物品单例未获取");
         InventoryManager.Instance.playerMoney = startingMoney;
 
         // 显示新闻面板

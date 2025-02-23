@@ -17,6 +17,7 @@ public class Singleton<T> : MonoBehaviour where T: Singleton<T>
         }else
         {
             instance = (T)this;
+            Debug.Log(this.name+"已完成单例化");
         }
     }
 

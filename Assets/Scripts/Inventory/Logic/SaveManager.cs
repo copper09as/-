@@ -1,5 +1,5 @@
-using MFarm.Inventory;
 using System.Collections.Generic;
+using MFarm.Inventory;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +12,9 @@ public class SaveManager : Singleton<SaveManager>
     {
         saveButton.onClick.AddListener(OnSave);
         Load(); // 先尝试加载存档
+        Debug.Log(buildingSave.buildingIDs.Count);
+
+
     }
 
     private void Load()
@@ -21,10 +24,11 @@ public class SaveManager : Singleton<SaveManager>
         {
             Debug.Log("No save found, creating new game");
             InitNewGame();
+
             return;
         }
 
-        buildingSave = tempSave;
+        this.buildingSave = tempSave;
 
         // 确保列表初始化
         if (buildingSave.buildingSlots == null)
@@ -33,35 +37,35 @@ public class SaveManager : Singleton<SaveManager>
 
         // 重建建筑
 
-            foreach (var loadBuilding in buildingSave.buildingIDs)
+        foreach (var loadBuilding in buildingSave.buildingIDs)
+        {
+            var buildingData = BuildingManager.Instance.GetId(loadBuilding.buildingID);
+            if (buildingData == null) continue;
+
+            BuildingBuilder<Building> builder = new BuildingBuilder<Building>();
+            builder.AddSprite(buildingData.sprite);
+            builder.SetDetails(buildingData);
+
+            var targetGrid = BuildingManager.Instance.gridSlot?.grids?.Find(i => i.transPosition == loadBuilding.pos);
+            if (targetGrid != null)
             {
-                var buildingData = BuildingManager.Instance.GetId(loadBuilding.buildingID);
-                if (buildingData == null) continue;
-
-                BuildingBuilder<Building> builder = new BuildingBuilder<Building>();
-                builder.AddSprite(buildingData.sprite);
-                builder.SetDetails(buildingData);
-
-                var targetGrid = BuildingManager.Instance.gridSlot?.grids?.Find(i => i.transPosition == loadBuilding.pos);
-                if (targetGrid != null)
-                {
-                    builder.SetTrans(targetGrid.transform.position, new Vector2(0.1f, 0.1f), 6);
-                    builder.Create(BuildingManager.Instance.GridBuilds, loadBuilding.pos, true);
-                    SaveManager.Instance.buildingSave.buildingIDs.Add(builder.buildingID);
+                builder.SetTrans(targetGrid.transform.position, new Vector2(0.1f, 0.1f), 6);
+                builder.Create(BuildingManager.Instance.GridBuilds, loadBuilding.pos, true);
             }
 
-                // 更新区域网格状态
-                if (buildingData.areaGrid != null)
+            // 更新区域网格状态
+            if (buildingData.areaGrid != null)
+            {
+                foreach (var area in buildingData.areaGrid)
                 {
-                    foreach (var area in buildingData.areaGrid)
-                    {
-                        var addPosition = area + loadBuilding.pos;
-                        var grid = BuildingManager.Instance.gridSlot?.grids?.Find(i => i.transPosition == addPosition);
-                        if (grid != null) grid.canPlace = false;
-                    }
+                    var addPosition = area + loadBuilding.pos;
+                    var grid = BuildingManager.Instance.gridSlot?.grids?.Find(i => i.transPosition == addPosition);
+                    if (grid != null) grid.canPlace = false;
                 }
             }
-        
+        }
+
+
 
         // 更新槽位状态
         if (InventoryManager.Instance?.buildingUi?.slots != null)
@@ -109,7 +113,7 @@ public class SaveManager : Singleton<SaveManager>
         if (buildingSave == null) return;
 
         // 更新建筑数据
-       
+
 
         // 更新金钱
         if (InventoryManager.Instance != null)

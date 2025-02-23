@@ -27,6 +27,7 @@ public class GameSave : MonoBehaviour
         {
             var json = File.ReadAllText(path);
             var data = JsonUtility.FromJson<T>(json);
+            Debug.Log(json);
             Debug.Log($"成功在{path}读取");
             return data;
         }
