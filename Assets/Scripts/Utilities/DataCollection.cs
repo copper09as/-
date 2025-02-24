@@ -15,6 +15,7 @@ public class ItemDetails
     public bool canPickup; //  是否被拾取
     public bool canDropped; // 是否被丢弃
     public bool canCarried; // 是否可以拿起
+
     public int transPrice;
     public int initPrice = 0;
     private int _itemPrice;

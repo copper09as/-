@@ -21,6 +21,7 @@ namespace MFarm.Inventory
         [Header("通用背包")]
         [SerializeField] private GameObject baseBag;
 
+
         public GameObject shopSlotPrefab;
 
         [Header("交易UI")]
@@ -102,6 +103,13 @@ namespace MFarm.Inventory
                 var slot = Instantiate(prefab, baseBag.transform.GetChild(0)).GetComponent<SlotUI>();
                 slot.slotIndex = i;
                 baseBagSlots.Add(slot);
+
+                // 获取物品信息
+                var itemDetails = InventoryManager.Instance.GetItemDetails(bagData.itemList[i].itemID);
+
+                // 更新物品名字和价格
+                slot.itemNameText.text = itemDetails.itemName; // 设置物品名字
+                slot.itemPriceText.text = itemDetails.itemPrice.ToString(); // 设置物品价格
             }
 
             LayoutRebuilder.ForceRebuildLayoutImmediate(baseBag.GetComponent<RectTransform>());
@@ -150,6 +158,7 @@ namespace MFarm.Inventory
                         {
                             var item = InventoryManager.Instance.GetItemDetails(list[i].itemID);
                             playerSlots[i].UpdateSlot(item, list[i].itemAmout);
+
                         }
                         else
                         {

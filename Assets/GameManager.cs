@@ -9,6 +9,7 @@ using UnityEngine.Events;
 public class GameManager : Singleton<GameManager>
 {
     // 原有UI引用
+    public InventoryBag_SO Shop;
     [SerializeField] private Button nextDayButton;
     [SerializeField] private TextMeshProUGUI dayText;
     [SerializeField] private NPCFunction shop;
