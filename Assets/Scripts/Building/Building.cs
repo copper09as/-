@@ -11,8 +11,7 @@ public class Building : MonoBehaviour
     public Vector2 centerGrid;
     private void OnDisable()
     {
-        var id = SaveManager.Instance.buildingSave.buildingIDs.Find(i => i.pos == buildingID.pos);
-        SaveManager.Instance.buildingSave.buildingIDs.Remove(id);
+
     }
     private void Start()
     {
@@ -33,6 +32,8 @@ public class Building : MonoBehaviour
             return;
         }
         if (!isPlace) return;
+        var id = SaveManager.Instance.buildingSave.buildingIDs.Find(i => i.pos == buildingID.pos);
+        SaveManager.Instance.buildingSave.buildingIDs.Remove(id);
         TempBuilder<TempBuild> tempBuilder = new TempBuilder<TempBuild>();
         tempBuilder.Create(BuildingManager.Instance.tempBuild);
         tempBuilder.AddSprite(buildingDetails.sprite);

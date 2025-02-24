@@ -13,18 +13,16 @@ public class SaveManager : Singleton<SaveManager>
     void Start()
     {
         saveButton.onClick.AddListener(OnSave);
-        StartCoroutine(LoadAfterDelay(0.1f)); // 延迟2秒加载
+        StartCoroutine(LoadAfterDelay()); // 延迟2秒加载
     }
 
-    private IEnumerator LoadAfterDelay(float delay)
+    private IEnumerator LoadAfterDelay()
     {
         // 显示加载界面
         if (loadingPanel != null)
         {
             loadingPanel.SetActive(true);
         }
-
-        Debug.Log("Loading game after " + delay + " seconds...");
         yield return null;
 
         Load();
@@ -35,7 +33,55 @@ public class SaveManager : Singleton<SaveManager>
             loadingPanel.SetActive(false);
         }
     }
+    public void LoadBuilding()
+    {
+        if (buildingSave.buildingSlots == null)
+            buildingSave.buildingSlots = new List<bool>();
+        var buildingsToLoad = buildingSave.buildingIDs.ToArray(); // 转换为数组防止修改
+        var gridSlot = BuildingManager.Instance.gridSlot;
+        var buildingManager = BuildingManager.Instance;
+        // 重建建筑
+        foreach (var loadBuilding in buildingsToLoad)
+        {
+            var buildingData = BuildingManager.Instance.GetId(loadBuilding.buildingID);
+            if (buildingData == null) continue;
 
+            BuildingBuilder<Building> builder = new BuildingBuilder<Building>();
+            builder.AddSprite(buildingData.sprite);
+            builder.SetDetails(buildingData);
+
+            var targetGrid = BuildingManager.Instance.gridSlot?.grids?.Find(i => i.transPosition == loadBuilding.pos);
+            if (targetGrid != null)
+            {
+                builder.SetTrans(targetGrid.transform.position, new Vector2(0.1f, 0.1f), 6);
+                builder.Create(BuildingManager.Instance.GridBuilds, loadBuilding.pos, true);
+            }
+
+            // 更新区域网格状态
+            if (buildingData.areaGrid != null)
+            {
+                foreach (var area in buildingData.areaGrid)
+                {
+                    var addPosition = area + loadBuilding.pos;
+                    var grid = BuildingManager.Instance.gridSlot?.grids?.Find(i => i.transPosition == addPosition);
+                    if (grid != null) grid.canPlace = false;
+                }
+            }
+        }
+
+        // 更新槽位状态
+        if (InventoryManager.Instance?.buildingUi?.slots != null)
+        {
+            for (int i = 0; i < InventoryManager.Instance.buildingUi.slots.Count; i++)
+            {
+                if (i < buildingSave.buildingSlots.Count)
+                {
+                    InventoryManager.Instance.buildingUi.slots[i].isFinish = buildingSave.buildingSlots[i];
+                    InventoryManager.Instance.buildingUi.slots[i].UpdateSlot();
+                }
+            }
+        }
+    }
     private void Load()
     {
         var tempSave = GameSave.LoadByJson<BuildingSave>("Load1.json");
@@ -44,12 +90,17 @@ public class SaveManager : Singleton<SaveManager>
             Debug.Log("No save found, creating new game");
             InitNewGame();
             return;
-        }
 
+        }
         buildingSave = tempSave;
+        if (InventoryManager.Instance != null)
+        {
+            InventoryManager.Instance.playerMoney = buildingSave.playerMoney;
+        }
+        
 
         // 确保列表初始化
-        if (buildingSave.buildingSlots == null)
+       /* if (buildingSave.buildingSlots == null)
             buildingSave.buildingSlots = new List<bool>();
 
         // 重建建筑
@@ -92,13 +143,10 @@ public class SaveManager : Singleton<SaveManager>
                     InventoryManager.Instance.buildingUi.slots[i].UpdateSlot();
                 }
             }
-        }
+        }*/
 
         // 更新金钱
-        if (InventoryManager.Instance != null)
-        {
-            InventoryManager.Instance.playerMoney = buildingSave.playerMoney;
-        }
+
     }
 
   

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class BuildingBuilder<T> : Builder<T> where T :Building
 {
+
     GameObject gridBuild = new GameObject();
     BuildingID buildingID = new BuildingID();
 
@@ -30,18 +31,17 @@ public class BuildingBuilder<T> : Builder<T> where T :Building
     {
         if(!isLoad)
         {
-           
             buildingID.isFinish = 0;
             buildingID.pos = centerPosition;
             SaveManager.Instance.buildingSave.buildingIDs.Add(buildingID);
         }
-       
+        BuildingManager.Instance.buildings.Add(gridBuild.GetComponent<Building>());
         gridBuild.transform.parent = transform;
         gridBuild.GetComponent<Building>().centerGrid = centerPosition;
         gridBuild.GetComponent<Building>().buildingID.pos = centerPosition;
         gridBuild.AddComponent<PolygonCollider2D>();
         gridBuild.GetComponent<T>().isPlace = true;
-        BuildingManager.Instance.buildings.Add(gridBuild.GetComponent<Building>());
+        
     }
 
     public override void Create()
