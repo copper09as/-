@@ -23,7 +23,7 @@ MonoBehaviour:
     canPickup: 0
     canDropped: 0
     canCarried: 0
-    transPrice: 155
+    transPrice: 0
     initPrice: 688
     sellPercentage: 1
   - itemID: 1001
@@ -36,7 +36,7 @@ MonoBehaviour:
     canPickup: 0
     canDropped: 0
     canCarried: 1
-    transPrice: 100
+    transPrice: 0
     initPrice: 176
     sellPercentage: 1
   - itemID: 1002
@@ -49,7 +49,7 @@ MonoBehaviour:
     canPickup: 0
     canDropped: 0
     canCarried: 1
-    transPrice: 30
+    transPrice: 0
     initPrice: 153
     sellPercentage: 1
   - itemID: 1003
@@ -62,7 +62,7 @@ MonoBehaviour:
     canPickup: 0
     canDropped: 0
     canCarried: 1
-    transPrice: 10
+    transPrice: 0
     initPrice: 0
     sellPercentage: 1
   - itemID: 1004

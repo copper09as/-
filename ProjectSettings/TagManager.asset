@@ -84,3 +84,15 @@ TagManager:
   - name: Building
     uniqueID: 2988860617
     locked: 0
+  - name: Ground
+    uniqueID: 728644545
+    locked: 0
+  - name: Trees
+    uniqueID: 1529587797
+    locked: 0
+  - name: Mountains
+    uniqueID: 2868324769
+    locked: 0
+  - name: Sky
+    uniqueID: 4054190939
+    locked: 0

@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6693ee7703e3d864ab3e9034be7d6c82, type: 3}
+  m_Name: "\u5EFA\u7B51\u5C42"
+  m_EditorClassIdentifier: 
+  layerName: Ground
+  sprites:
+  - {fileID: -1119809747, guid: a7782eadc3a02984db55c977fedfb34b, type: 3}
+  - {fileID: -1276548446, guid: a7782eadc3a02984db55c977fedfb34b, type: 3}
+  - {fileID: -498168205, guid: a7782eadc3a02984db55c977fedfb34b, type: 3}
+  minDistance: 5
+  maxDistance: 50
+  density: 0.1
+  yPosition: 0.3
+  scaleRange: {x: 0.5, y: 0.5}
+  scrollSpeed: 30
+  speedOffset: 0
+  useParallax: 0
+  parallaxFactor: 0.5
+  sortingOrder: 8
+  maxObjectsInView: 1
+  minSpacing: 4
